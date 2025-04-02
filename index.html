@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-image: url('file:///C:/Users/ACER/Desktop/petsimulatoe/day.jpg.webp');
+            background-image: url('images/day.jpg');
             background-size: cover;
             background-position: center;
             transition: background-image 1s, color 1s;
@@ -51,7 +51,6 @@
         #happiness .status { background: green; }
         #energy .status { background: blue; }
 
-        /* Always keep text black */
         h1, h3 {
             color: black !important;
         }
@@ -61,7 +60,7 @@
     <div class="container">
         <h1>Virtual Pet Simulator</h1>
         <div class="pet">
-            <img id="pet-image" src="file:///C:/Users/ACER/Desktop/petsimulatoe/dog_happy.png.png" alt="Pet">
+            <img id="pet-image" src="images/dog_happy.png" alt="Pet">
         </div>
         
         <h3>Hunger</h3>
@@ -93,29 +92,29 @@
         function feedPet() {
             hunger = Math.max(0, hunger - 20);
             happiness = Math.min(100, happiness + 5);
-            document.getElementById("pet-image").src = "file:///C:/Users/ACER/Desktop/petsimulatoe/dog_hungry.png.png";
+            document.getElementById("pet-image").src = "images/dog_hungry.png";
             updateStatus();
         }
 
         function playPet() {
             happiness = Math.min(100, happiness + 20);
             energy = Math.max(0, energy - 15);
-            document.getElementById("pet-image").src = "file:///C:/Users/ACER/Desktop/petsimulatoe/dog_excited.png.png";
+            document.getElementById("pet-image").src = "images/dog_excited.png";
             updateStatus();
         }
 
         function sleepPet() {
             energy = Math.min(100, energy + 30);
             hunger = Math.min(100, hunger + 10);
-            document.getElementById("pet-image").src = "file:///C:/Users/ACER/Desktop/petsimulatoe/dog_sleeping.png.png";
+            document.getElementById("pet-image").src = "images/dog_sleeping.png";
             updateStatus();
         }
 
         function toggleDayNight() {
             isDay = !isDay;
             document.body.style.backgroundImage = isDay ? 
-                "url('file:///C:/Users/ACER/Desktop/petsimulatoe/day.jpg.webp')" : 
-                "url('file:///C:/Users/ACER/Desktop/petsimulatoe/night.jpg.webp')";
+                "url('images/day.jpg')" : 
+                "url('images/night.jpg')";
         }
 
         setInterval(() => {
