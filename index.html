@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Pet Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('file:///C:/Users/ACER/Desktop/petsimulatoe/day.jpg.webp');
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s, color 1s;
+        }
+        .container {
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .pet img {
+            width: 150px;
+            height: auto;
+        }
+        .status-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .status {
+            height: 100%;
+            transition: width 0.5s;
+        }
+        .buttons button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .buttons button:hover {
+            opacity: 0.8;
+        }
+        #hunger .status { background: red; }
+        #happiness .status { background: green; }
+        #energy .status { background: blue; }
+
+        /* Always keep text black */
+        h1, h3 {
+            color: black !important;
+        }
+    </style>
+</head>
+<body id="body">
+    <div class="container">
+        <h1>Virtual Pet Simulator</h1>
+        <div class="pet">
+            <img id="pet-image" src="file:///C:/Users/ACER/Desktop/petsimulatoe/dog_happy.png.png" alt="Pet">
+        </div>
+        
+        <h3>Hunger</h3>
+        <div id="hunger" class="status-bar"><div class="status" style="width: 50%;"></div></div>
+        
+        <h3>Happiness</h3>
+        <div id="happiness" class="status-bar"><div class="status" style="width: 50%;"></div></div>
+        
+        <h3>Energy</h3>
+        <div id="energy" class="status-bar"><div class="status" style="width: 50%;"></div></div>
+
+        <div class="buttons">
+            <button onclick="feedPet()" style="background: orange;">🥩 Feed</button>
+            <button onclick="playPet()" style="background: yellow;">⚽ Play</button>
+            <button onclick="sleepPet()" style="background: purple; color: white;">🌙 Sleep</button>
+        </div>
+    </div>
+
+    <script>
+        let hunger = 50, happiness = 50, energy = 50;
+        let isDay = true;
+
+        function updateStatus() {
+            document.querySelector("#hunger .status").style.width = hunger + "%";
+            document.querySelector("#happiness .status").style.width = happiness + "%";
+            document.querySelector("#energy .status").style.width = energy + "%";
+        }
+
+        function feedPet() {
+            hunger = Math.max(0, hunger - 20);
+            happiness = Math.min(100, happiness + 5);
+            document.getElementById("pet-image").src = "file:///C:/Users/ACER/Desktop/petsimulatoe/dog_hungry.png.png";
+            updateStatus();
+        }
+
+        function playPet() {
+            happiness = Math.min(100, happiness + 20);
+            energy = Math.max(0, energy - 15);
+            document.getElementById("pet-image").src = "file:///C:/Users/ACER/Desktop/petsimulatoe/dog_excited.png.png";
+            updateStatus();
+        }
+
+        function sleepPet() {
+            energy = Math.min(100, energy + 30);
+            hunger = Math.min(100, hunger + 10);
+            document.getElementById("pet-image").src = "file:///C:/Users/ACER/Desktop/petsimulatoe/dog_sleeping.png.png";
+            updateStatus();
+        }
+
+        function toggleDayNight() {
+            isDay = !isDay;
+            document.body.style.backgroundImage = isDay ? 
+                "url('file:///C:/Users/ACER/Desktop/petsimulatoe/day.jpg.webp')" : 
+                "url('file:///C:/Users/ACER/Desktop/petsimulatoe/night.jpg.webp')";
+        }
+
+        setInterval(() => {
+            hunger = Math.min(100, hunger + 5);
+            happiness = Math.max(0, happiness - 5);
+            energy = Math.max(0, energy - 3);
+            updateStatus();
+        }, 3000);
+
+        setInterval(toggleDayNight, 15000);
+    </script>
+</body>
+</html>
